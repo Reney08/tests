@@ -1,0 +1,23 @@
+# compose.yaml
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: dockerfile_backend
+    ports:
+      - "5000:5000"  # Expose the backend directly
+    networks:
+      - app_net
+    container_name: backend
+  frontend:
+    build:
+      context: .
+      dockerfile: dockerfile_frontend
+    ports:
+      - "8080:80" # Expose the frontend on port 8080
+    networks:
+      - app_net
+    container_name: frontend
+networks:
+  app_net:
+    driver: bridge
